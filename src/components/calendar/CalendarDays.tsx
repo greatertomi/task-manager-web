@@ -33,6 +33,13 @@ const CalendarDays: FC<CalendarDaysProps> = ({ day, changeCurrentDay }) => {
     currentDays.push(calendarDay);
   }
 
+  console.log('currentDays ->', {
+    day,
+    currentDays,
+    firstDayOfMonth,
+    weekdayOfFirstDay,
+  });
+
   return (
     <div className="table-content">
       {currentDays.map((tempDay, index) => (
