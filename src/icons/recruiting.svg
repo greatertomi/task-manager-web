@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 2732 2048" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+<svg width="100%" height="100%" viewBox="0 0 2732 2048" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlnsserif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
     <g transform="matrix(1,0,0,1,38.2908,2.29616)">
-        <g id="_5---RECRUITING" serif:id="5 - RECRUITING">
-            <g id="CV-3" serif:id="CV 3" transform="matrix(1,0,0,1,1162,54.025)">
+        <g id="_5---RECRUITING" serifid="5 - RECRUITING">
+            <g id="CV-3" serifid="CV 3" transform="matrix(1,0,0,1,1162,54.025)">
                 <rect x="475.631" y="335.141" width="638.256" height="861.353" style="fill:rgb(255,213,147);"/>
                 <g transform="matrix(1,0,0,1,-11.3624,-30.0351)">
                     <circle cx="945.873" cy="530.917" r="121.215" style="fill:white;"/>
@@ -32,7 +32,7 @@
                     <rect x="527.374" y="638.53" width="501.388" height="46.728" style="fill:rgb(253,165,39);"/>
                 </g>
             </g>
-            <g id="CV-2" serif:id="CV 2" transform="matrix(1,0,0,1,574.423,27.4685)">
+            <g id="CV-2" serifid="CV 2" transform="matrix(1,0,0,1,574.423,27.4685)">
                 <rect x="475.631" y="335.141" width="638.256" height="861.353" style="fill:rgb(181,214,212);"/>
                 <g>
                     <g transform="matrix(1,0,0,1,-11.3624,-30.0351)">
@@ -61,7 +61,7 @@
                     <rect x="527.374" y="638.53" width="501.388" height="46.728" style="fill:rgb(149,192,190);"/>
                 </g>
             </g>
-            <g id="CV-1" serif:id="CV 1">
+            <g id="CV-1" serifid="CV 1">
                 <rect x="475.631" y="335.141" width="638.256" height="861.353" style="fill:rgb(255,243,228);"/>
                 <g>
                     <g transform="matrix(1,0,0,1,-11.3624,-30.0351)">
@@ -88,7 +88,7 @@
                     </g>
                 </g>
             </g>
-            <g id="PORTRAIT-IN-MAGNIFYING-GLASS" serif:id="PORTRAIT IN MAGNIFYING GLASS" transform="matrix(0.895096,-0.133784,0.207021,1.3851,217.581,-1.96196)">
+            <g id="PORTRAIT-IN-MAGNIFYING-GLASS" serifid="PORTRAIT IN MAGNIFYING GLASS" transform="matrix(0.895096,-0.133784,0.207021,1.3851,217.581,-1.96196)">
                 <g transform="matrix(1,0,0,1,-11.3624,-30.0351)">
                     <circle cx="945.873" cy="530.917" r="121.215" style="fill:white;"/>
                 </g>
@@ -105,7 +105,7 @@
                     <path d="M891.712,457.722C891.784,434.458 910.694,415.591 933.977,415.591C957.303,415.591 976.242,434.529 976.242,457.856C976.242,459.685 976.125,461.487 975.9,463.252C947.801,460.202 935.951,430.581 935.951,430.581C925.819,452.132 903.558,456.807 891.712,457.722Z"/>
                 </g>
             </g>
-            <g id="MAGNIFYING-GLASS" serif:id="MAGNIFYING GLASS">
+            <g id="MAGNIFYING-GLASS" serifid="MAGNIFYING GLASS">
                 <g transform="matrix(0.999924,0.0123565,-0.0123565,0.999924,14.8793,-12.3759)">
                     <path d="M1171,738.003L1199.57,919.454C1200.56,925.771 1206.5,930.091 1212.81,929.097C1219.13,928.103 1223.45,922.167 1222.45,915.851L1193.89,734.399C1192.89,728.083 1186.96,723.762 1180.64,724.756C1174.33,725.751 1170.01,731.686 1171,738.003Z" style="fill:rgb(221,97,64);"/>
                 </g>
