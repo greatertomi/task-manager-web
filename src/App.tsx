@@ -1,13 +1,14 @@
+import { ThemeProvider } from '@mui/material';
 import React from 'react';
 import './App.css';
 import LandingPage from './pages/landing/LandingPage';
+import { theme } from './theme';
 
 const App = () => {
-  console.log();
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <LandingPage />
-    </div>
+    </ThemeProvider>
   );
 };
 
