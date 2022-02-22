@@ -1,7 +1,7 @@
 import { Button, Typography } from '@mui/material';
 import React from 'react';
 import styled from 'styled-components';
-import { ReactComponent as LandingIcon } from '../../assets/recruiting.svg';
+import { ReactComponent as LandingIcon } from '../../assets/manbook.svg';
 import NavBar from '../../components/NavBar';
 
 const TopPageStyle = styled.div`
