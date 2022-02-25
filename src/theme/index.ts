@@ -1,5 +1,4 @@
 import { createTheme } from '@mui/material';
-import { orange } from '@mui/material/colors';
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -21,7 +20,7 @@ export const theme = createTheme({
       main: '#705CFF',
     },
   },
-  status: {
-    danger: orange[500],
+  typography: {
+    fontFamily: "'Ubuntu', sans-serif",
   },
 });
