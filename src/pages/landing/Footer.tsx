@@ -1,48 +1,65 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Container, Typography } from '@mui/material';
 import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as BoardLady } from '../../assets/lady_board.svg';
 
 const FooterContainer = styled.div`
   background: #eff1ff;
-  height: 400px;
-  padding: 30px 50px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
+  padding: 50px 0;
 `;
 
 const HorizontalLine = styled.hr`
   border-top: 1px solid #dbd6d2;
-  width: 60%;
+  width: 100%;
   z-index: 50;
+  margin-top: 30px;
+`;
+
+const FooterIcon = styled(BoardLady)`
+  height: 300px;
+  width: 500px;
+
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const FooterActionText = styled.div`
+  align-self: center;
+  justify-self: center;
+  margin-left: 50px;
+
+  @media only screen and (min-width: 768px) {
+    width: 500px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    margin-left: 0;
+  }
 `;
 
 const Footer = () => {
   return (
     <FooterContainer>
-      <Box display="flex">
-        <Box>
-          <BoardLady height={300} width={500} />
+      <Container>
+        <Box display="flex">
+          <FooterIcon />
+          <FooterActionText>
+            <Typography variant="h3">
+              Achieve peace of mind with Task Manager
+            </Typography>
+            <Box mt={3}>
+              <Button variant="contained" color="primary" size="large">
+                Get Started
+              </Button>
+            </Box>
+          </FooterActionText>
         </Box>
-        <Box display="flex" flexDirection="column" mt={5}>
-          <Typography variant="h3">
-            Achieve peace of mind
-            <br />
-            with Task Manager
-          </Typography>
-          <Box mt={3}>
-            <Button variant="contained" color="primary" size="large">
-              Get Started
-            </Button>
-          </Box>
+        <HorizontalLine />
+        <Box mt={2}>
+          <Typography textAlign="center">&copy; John Oshalusi 2022</Typography>
         </Box>
-      </Box>
-      <HorizontalLine />
-      <Box mt={1}>
-        <Typography>&copy; John Oshalusi 2022</Typography>
-      </Box>
+      </Container>
     </FooterContainer>
   );
 };
