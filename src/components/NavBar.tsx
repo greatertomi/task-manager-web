@@ -27,7 +27,7 @@ const NavBar = () => {
   return (
     <NavbarContainerStyle>
       <Typography variant="h5" color="primary" fontWeight="bold">
-        Task Manager
+        TaskManager
       </Typography>
       <Box display="flex" gap={1}>
         <NavLink to="/login">

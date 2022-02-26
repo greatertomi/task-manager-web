@@ -1,8 +1,11 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
+import { useFormik } from 'formik';
 import React from 'react';
 import { AiFillApple, AiFillFacebook } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import styled from 'styled-components';
+import * as yup from 'yup';
+import { PasswordInput, TextInput } from '../components/inputs';
 
 const PageContainer = styled.section`
   background-color: #fafafa;
@@ -54,7 +57,30 @@ const HorizontalDivider = styled.div`
   }
 `;
 
+const validationSchema = yup.object({
+  email: yup
+    .string()
+    .email('Enter a valid email')
+    .required('Email is required'),
+  password: yup
+    .string()
+    .min(8, 'Password should be of minimum 8 characters length')
+    .required('Password is required'),
+});
+
 const Login = () => {
+  const onSubmit = (values: any) => {
+    console.log('submitting', values);
+  };
+  const { values, handleSubmit, handleChange, touched, errors } = useFormik<{
+    email: string;
+    password: string;
+  }>({
+    initialValues: { email: '', password: '' },
+    validationSchema,
+    onSubmit,
+  });
+
   return (
     <PageContainer>
       <AuthPaper>
@@ -81,6 +107,33 @@ const Login = () => {
         <HorizontalDivider>
           <span>OR</span>
         </HorizontalDivider>
+        <form onSubmit={handleSubmit}>
+          <TextInput
+            label="Email"
+            name="email"
+            value={values.email}
+            onChange={handleChange}
+            error={touched.email && Boolean(errors.email)}
+            helperText={touched.email && errors.email}
+          />
+          <PasswordInput
+            label="Password"
+            name="password"
+            value={values.password}
+            onChange={handleChange}
+            error={touched.password && Boolean(errors.password)}
+            helperText={(touched.password && errors.password) || ''}
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            sx={{ mt: 2 }}
+          >
+            Log in
+          </Button>
+        </form>
       </AuthPaper>
     </PageContainer>
   );
