@@ -8,7 +8,7 @@ const FooterContainer = styled.div`
   padding: 50px 0;
 `;
 
-const HorizontalLine = styled.hr`
+export const HorizontalLine = styled.hr`
   border-top: 1px solid #dbd6d2;
   width: 100%;
   z-index: 50;

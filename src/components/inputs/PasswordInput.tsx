@@ -39,13 +39,14 @@ const PasswordInput: FC<PasswordInputProps> = ({
   };
 
   return (
-    <Box mt={2}>
+    <Box mt={1}>
       <Typography variant="subtitle1">Password</Typography>
       <OutlinedInput
         id="outlined-adornment-password"
+        name={name}
         type={showPassword ? 'text' : 'password'}
         value={value}
-        onChange={() => onChange('password')}
+        onChange={onChange}
         fullWidth
         size="small"
         endAdornment={

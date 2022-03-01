@@ -134,6 +134,11 @@ const Login = () => {
             Log in
           </Button>
         </form>
+        <Typography my={3}>Forgot your password</Typography>
+        <HorizontalDivider />
+        <Box>
+          <Typography>Don&apos;t have an account?</Typography>
+        </Box>
       </AuthPaper>
     </PageContainer>
   );
