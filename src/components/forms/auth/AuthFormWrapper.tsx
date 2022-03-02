@@ -6,13 +6,14 @@ import { FcGoogle } from 'react-icons/fc';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { BaseUser } from '../../../types/User';
+import { MediumLogoText } from '../../brand/logo';
 import FormContainer from '../../FormContainer';
 
-const AuthPaper = styled.div`
+const AuthPaper = styled.div<{ height?: string }>`
   border: 1px solid #dbdbdb;
   width: 450px;
   background: white;
-  height: 650px;
+  height: ${({ height }) => height || '650px'};
   position: fixed;
   left: calc(50% - (450px / 2));
   top: 50px;
@@ -83,6 +84,8 @@ interface AuthFormWrapperProps<T> {
   buttonLabel?: string;
   working?: boolean;
   showDisclaimer?: boolean;
+  introText?: string;
+  paperHeight?: string;
 }
 
 const AuthFormWrapper = <T extends BaseUser>({
@@ -98,15 +101,20 @@ const AuthFormWrapper = <T extends BaseUser>({
   working,
   showLogin,
   showDisclaimer,
+  introText,
+  paperHeight,
 }: AuthFormWrapperProps<T>) => {
   return (
-    <AuthPaper>
-      <Typography variant="h6" color="primary">
-        Task Manager
-      </Typography>
+    <AuthPaper height={paperHeight}>
+      <MediumLogoText />
       <Typography variant="h5" fontWeight="bold" mt={1}>
         {pageTitle}
       </Typography>
+      {introText && (
+        <Box color="secondary" sx={{ fontSize: '14px', my: 3 }}>
+          By continuing you agree to our terms of service and privacy policy.
+        </Box>
+      )}
       {showOAuthButtons && (
         <>
           <Box my={3}>
@@ -140,13 +148,13 @@ const AuthFormWrapper = <T extends BaseUser>({
         </FormContainer>
       </Box>
       {showDisclaimer && (
-        <Box color="secondary" sx={{ fontSize: '14px', my: 3 }}>
+        <Box sx={{ fontSize: '14px', my: 3 }}>
           By continuing you agree to our terms of service and privacy policy.
         </Box>
       )}
       {showForgotPassword && (
         <Box my={3}>
-          <ActionText to="/" style={{ color: 'black' }}>
+          <ActionText to="/forgotpassword" style={{ color: 'black' }}>
             Forgot your password?
           </ActionText>
         </Box>
@@ -162,7 +170,7 @@ const AuthFormWrapper = <T extends BaseUser>({
           )}
           {showLogin && (
             <ActionDiv>
-              Already signed up?
+              {pageTitle === 'Sign up' && 'Already signed up?'}
               <ActionText to="/login">Go to Login</ActionText>
             </ActionDiv>
           )}
