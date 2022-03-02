@@ -7,7 +7,7 @@ interface FormContainerProps<T> {
   validationSchema: any;
   onSubmit: (values: T) => void;
   initialValues: T;
-  children: ReactNode[];
+  children: ReactNode[] | ReactNode;
   buttonLabel?: string;
   working?: boolean;
 }
