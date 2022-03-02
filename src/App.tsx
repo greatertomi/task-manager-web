@@ -3,8 +3,9 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import GlobalStyle from './globalStyles';
+import ForgotPassword from './pages/auth/ForgotPassword';
 import Login from './pages/auth/Login';
-import Register from './pages/auth/Register';
+import SignUp from './pages/auth/SignUp';
 import LandingPage from './pages/landing/LandingPage';
 import { theme } from './theme';
 
@@ -16,7 +17,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/forgotPassword" element={<ForgotPassword />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

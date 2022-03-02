@@ -1,4 +1,5 @@
 import { Box, Typography } from '@mui/material';
+import { styled as muiStyled } from '@mui/material/styles';
 import React, { ReactNode } from 'react';
 import { AiFillApple, AiFillFacebook } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
@@ -52,14 +53,21 @@ const HorizontalDivider = styled.div`
   }
 `;
 
-const SignupText = styled(Link)`
-  margin-left: 3px;
-  text-decoration: none;
-  color: black;
-  cursor: pointer;
-  &:hover {
-    text-decoration: underline;
-  }
+const ActionText = muiStyled(Link)(({ theme }) => ({
+  marginLeft: '3px',
+  textDecoration: 'none',
+  color: theme.palette.primary.main,
+  cursor: 'pointer',
+  fontSize: '14px',
+  '&:hover': {
+    textDecoration: 'underline',
+  },
+}));
+
+const ActionDiv = styled.div`
+  font-size: 14px;
+  text-align: center;
+  margin-top: 20px;
 `;
 
 interface AuthFormWrapperProps<T> {
@@ -71,8 +79,10 @@ interface AuthFormWrapperProps<T> {
   children: ReactNode | ReactNode[];
   showForgotPassword?: boolean;
   showSignUp?: boolean;
+  showLogin?: boolean;
   buttonLabel?: string;
   working?: boolean;
+  showDisclaimer?: boolean;
 }
 
 const AuthFormWrapper = <T extends BaseUser>({
@@ -86,6 +96,8 @@ const AuthFormWrapper = <T extends BaseUser>({
   children,
   buttonLabel,
   working,
+  showLogin,
+  showDisclaimer,
 }: AuthFormWrapperProps<T>) => {
   return (
     <AuthPaper>
@@ -116,7 +128,7 @@ const AuthFormWrapper = <T extends BaseUser>({
           </HorizontalDivider>
         </>
       )}
-      <Box mt={1}>
+      <Box mt={2}>
         <FormContainer
           onSubmit={onSubmit}
           initialValues={initialValues}
@@ -127,21 +139,34 @@ const AuthFormWrapper = <T extends BaseUser>({
           {children}
         </FormContainer>
       </Box>
-      {showForgotPassword && (
-        <Box my={3}>
-          <SignupText to="/">Forgot your password?</SignupText>
+      {showDisclaimer && (
+        <Box color="secondary" sx={{ fontSize: '14px', my: 3 }}>
+          By continuing you agree to our terms of service and privacy policy.
         </Box>
       )}
-      {showSignUp && (
-        <>
+      {showForgotPassword && (
+        <Box my={3}>
+          <ActionText to="/" style={{ color: 'black' }}>
+            Forgot your password?
+          </ActionText>
+        </Box>
+      )}
+      {(showSignUp || showLogin) && (
+        <Box mt={3}>
           <HorizontalDivider />
-          <Box>
-            <Typography>
+          {showSignUp && (
+            <ActionDiv>
               Don&apos;t have an account?
-              <SignupText to="/">Sign up</SignupText>
-            </Typography>
-          </Box>
-        </>
+              <ActionText to="/signup">Sign up</ActionText>
+            </ActionDiv>
+          )}
+          {showLogin && (
+            <ActionDiv>
+              Already signed up?
+              <ActionText to="/login">Go to Login</ActionText>
+            </ActionDiv>
+          )}
+        </Box>
       )}
     </AuthPaper>
   );

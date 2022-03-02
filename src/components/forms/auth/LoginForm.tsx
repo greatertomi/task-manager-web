@@ -6,7 +6,7 @@ import { PasswordInput, TextInput } from '../../inputs';
 const LoginForm = () => {
   const { values, handleChange, errors } = useFormikContext<UserAuth>();
   return (
-    <div>
+    <>
       <TextInput
         label="Email"
         name="email"
@@ -21,7 +21,7 @@ const LoginForm = () => {
         onChange={handleChange}
         formError={errors.password}
       />
-    </div>
+    </>
   );
 };
 
