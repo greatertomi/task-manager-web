@@ -19,7 +19,7 @@ type PasswordInputProps = {
   label: string;
   value: string;
   onChange: (values: any) => void;
-  helperText?: string;
+  formError?: string;
 } & InputProps;
 
 const PasswordInput: FC<PasswordInputProps> = ({
@@ -27,7 +27,7 @@ const PasswordInput: FC<PasswordInputProps> = ({
   name,
   value,
   onChange,
-  helperText,
+  formError,
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -49,6 +49,7 @@ const PasswordInput: FC<PasswordInputProps> = ({
         onChange={onChange}
         fullWidth
         size="small"
+        error={!!formError}
         endAdornment={
           <InputAdornment position="end">
             <IconButton
@@ -67,7 +68,7 @@ const PasswordInput: FC<PasswordInputProps> = ({
         }
         {...props}
       />
-      {helperText && <HelperTextMessage>{helperText}</HelperTextMessage>}
+      {formError && <HelperTextMessage>{formError}</HelperTextMessage>}
     </Box>
   );
 };

@@ -1,11 +1,14 @@
 import { Box, Button, Typography } from '@mui/material';
-import { useFormik } from 'formik';
+import { useFormikContext } from 'formik';
 import React from 'react';
 import { AiFillApple, AiFillFacebook } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import * as yup from 'yup';
-import { PasswordInput, TextInput } from '../components/inputs';
+import FormContainer from '../../components/FormContainer';
+import { PasswordInput, TextInput } from '../../components/inputs';
+import { UserAuth } from '../../types/User';
 
 const PageContainer = styled.section`
   background-color: #fafafa;
@@ -57,6 +60,16 @@ const HorizontalDivider = styled.div`
   }
 `;
 
+const SignupText = styled(Link)`
+  margin-left: 3px;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
 const validationSchema = yup.object({
   email: yup
     .string()
@@ -68,18 +81,14 @@ const validationSchema = yup.object({
     .required('Password is required'),
 });
 
+const initialValues: UserAuth = { email: '', password: '' };
+
 const Login = () => {
-  const onSubmit = (values: any) => {
+  const onSubmit = (values: UserAuth) => {
     console.log('submitting', values);
   };
-  const { values, handleSubmit, handleChange, touched, errors } = useFormik<{
-    email: string;
-    password: string;
-  }>({
-    initialValues: { email: '', password: '' },
-    validationSchema,
-    onSubmit,
-  });
+
+  const { values, handleChange, errors } = useFormikContext<UserAuth>();
 
   return (
     <PageContainer>
@@ -107,22 +116,26 @@ const Login = () => {
         <HorizontalDivider>
           <span>OR</span>
         </HorizontalDivider>
-        <form onSubmit={handleSubmit}>
+        <FormContainer
+          onSubmit={onSubmit}
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          working={false}
+          buttonLabel="Log in"
+        >
           <TextInput
             label="Email"
             name="email"
             value={values.email}
             onChange={handleChange}
-            error={touched.email && Boolean(errors.email)}
-            helperText={touched.email && errors.email}
+            formError={errors.email}
           />
           <PasswordInput
             label="Password"
             name="password"
             value={values.password}
             onChange={handleChange}
-            error={touched.password && Boolean(errors.password)}
-            helperText={(touched.password && errors.password) || ''}
+            formError={errors.password}
           />
           <Button
             type="submit"
@@ -133,11 +146,16 @@ const Login = () => {
           >
             Log in
           </Button>
-        </form>
-        <Typography my={3}>Forgot your password</Typography>
+        </FormContainer>
+        <Box my={3}>
+          <SignupText to="/">Forgot your password?</SignupText>
+        </Box>
         <HorizontalDivider />
         <Box>
-          <Typography>Don&apos;t have an account?</Typography>
+          <Typography>
+            Don&apos;t have an account?
+            <SignupText to="/">Sign up</SignupText>
+          </Typography>
         </Box>
       </AuthPaper>
     </PageContainer>

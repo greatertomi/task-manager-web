@@ -12,6 +12,7 @@ type TextInputProps = {
   label: string;
   value: string;
   onChange: (values: any) => void;
+  formError?: string;
 } & TextFieldProps;
 
 const TextInput: FC<TextInputProps> = ({
@@ -19,6 +20,7 @@ const TextInput: FC<TextInputProps> = ({
   value,
   onChange,
   name,
+  formError,
   ...props
 }) => {
   const classes = useStyles();
@@ -33,6 +35,8 @@ const TextInput: FC<TextInputProps> = ({
         variant="outlined"
         size="small"
         fullWidth
+        error={!!formError}
+        helperText={formError || null}
         FormHelperTextProps={{
           className: classes.helperText,
         }}
