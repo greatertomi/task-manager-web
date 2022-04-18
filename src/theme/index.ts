@@ -19,6 +19,9 @@ export const theme = createTheme({
     primary: {
       main: '#705CFF',
     },
+    text: {
+      secondary: 'white',
+    },
   },
   typography: {
     fontFamily: "'Ubuntu', sans-serif",

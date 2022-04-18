@@ -8,6 +8,7 @@ import Login from './pages/auth/Login';
 import SignUp from './pages/auth/SignUp';
 import LandingPage from './pages/landing/LandingPage';
 import { theme } from './theme';
+import BasePage from './pages/dashboard/BasePage';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
+          <Route path="/dashboard" element={<BasePage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
