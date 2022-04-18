@@ -1,8 +1,14 @@
-import { Box } from '@mui/material';
+import { Avatar, Box } from '@mui/material';
+import { grey } from '@mui/material/colors';
 import { styled as muiStyled } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
 import React from 'react';
-import { AiOutlineHome, AiOutlineMenu } from 'react-icons/ai';
+import {
+  AiOutlineBell,
+  AiOutlineHome,
+  AiOutlineMenu,
+  AiOutlinePlus,
+} from 'react-icons/ai';
 
 const NavbarContainer = muiStyled('div')(({ theme }) => ({
   height: '40px',
@@ -11,6 +17,7 @@ const NavbarContainer = muiStyled('div')(({ theme }) => ({
   color: theme.palette.text.secondary,
   display: 'flex',
   alignItems: 'center',
+  justifyContent: 'space-between',
 }));
 
 const useStyles = makeStyles((theme) => ({
@@ -40,6 +47,27 @@ const Navbar = () => {
         </div>
         <div className={classes.icon}>
           <AiOutlineHome size={22} />
+        </div>
+      </Box>
+      <Box sx={{ display: 'flex', pr: 5, gap: 1 }}>
+        <div className={classes.icon}>
+          <AiOutlinePlus size={22} />
+        </div>
+        <div className={classes.icon}>
+          <AiOutlineBell size={22} />
+        </div>
+        <div>
+          <Avatar
+            sx={{
+              bgcolor: grey,
+              height: '28px',
+              width: '28px',
+              fontSize: '14px',
+              color: 'black',
+            }}
+          >
+            N
+          </Avatar>
         </div>
       </Box>
     </NavbarContainer>
