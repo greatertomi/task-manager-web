@@ -1,7 +1,12 @@
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import React from 'react';
+import styled from 'styled-components';
 import Navbar from '../../components/dashboard/Navbar';
 import SideNav from '../../components/dashboard/SideNav';
+
+const PageBodyStyles = styled.div`
+  padding: 30px 10px 50px 15%;
+`;
 
 const BasePage = () => {
   return (
@@ -9,7 +14,15 @@ const BasePage = () => {
       <Navbar />
       <Box sx={{ display: 'flex' }}>
         <SideNav />
-        <p>This is the base page</p>
+        <PageBodyStyles>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <h2>Today</h2>
+            <Typography sx={{ fontSize: '12px', margin: '10px 0 0 2px' }}>
+              15 Aug, 2022
+            </Typography>
+          </Box>
+          <Box mt={2}>Welcome, John.</Box>
+        </PageBodyStyles>
       </Box>
     </>
   );

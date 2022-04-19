@@ -9,10 +9,11 @@ const SideNavContainer = styled.div`
   padding: 30px 5px 30px 50px;
 `;
 
-const SideNavItem = styled.div`
+const SideNavItem = styled.div<{ active?: boolean }>`
   margin: 5px 0;
   padding: 10px;
   cursor: pointer;
+  background: ${({ active }) => (active ? '#ececec' : 'inherit')};
   &:hover {
     background: #ececec;
     border-radius: 5px;
@@ -29,7 +30,7 @@ const SideNav = () => {
         <BsInbox size={22} color="#236EE1" />
         <div>Inbox</div>
       </SideNavItem>
-      <SideNavItem>
+      <SideNavItem active>
         <BsCalendar2Date size={22} color="#038527" />
         <div>Today</div>
       </SideNavItem>

@@ -1,14 +1,15 @@
-import { Avatar, Box } from '@mui/material';
+import { Avatar, Box, IconButton, Menu, MenuItem } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { styled as muiStyled } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   AiOutlineBell,
   AiOutlineHome,
   AiOutlineMenu,
   AiOutlinePlus,
 } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 
 const NavbarContainer = muiStyled('div')(({ theme }) => ({
   height: '40px',
@@ -20,7 +21,7 @@ const NavbarContainer = muiStyled('div')(({ theme }) => ({
   justifyContent: 'space-between',
 }));
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   icon: {
     cursor: 'pointer',
     padding: '2px 4px',
@@ -32,6 +33,22 @@ const useStyles = makeStyles((theme) => ({
 
 const Navbar = () => {
   const classes = useStyles();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const navigate = useNavigate();
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const logOut = () => {
+    handleClose();
+    navigate('/', { replace: true });
+  };
 
   return (
     <NavbarContainer>
@@ -49,7 +66,7 @@ const Navbar = () => {
           <AiOutlineHome size={22} />
         </div>
       </Box>
-      <Box sx={{ display: 'flex', pr: 5, gap: 1 }}>
+      <Box sx={{ display: 'flex', pr: 5, gap: 1, alignItems: 'center' }}>
         <div className={classes.icon}>
           <AiOutlinePlus size={22} />
         </div>
@@ -57,17 +74,36 @@ const Navbar = () => {
           <AiOutlineBell size={22} />
         </div>
         <div>
-          <Avatar
-            sx={{
-              bgcolor: grey,
-              height: '28px',
-              width: '28px',
-              fontSize: '14px',
-              color: 'black',
+          <IconButton
+            onClick={handleClick}
+            aria-controls={open ? 'basic-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+          >
+            <Avatar
+              sx={{
+                bgcolor: grey,
+                height: '28px',
+                width: '28px',
+                fontSize: '14px',
+                color: 'black',
+                cursor: 'pointer',
+              }}
+            >
+              N
+            </Avatar>
+          </IconButton>
+          <Menu
+            open={open}
+            id="basic-menu"
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
             }}
           >
-            N
-          </Avatar>
+            <MenuItem onClick={logOut}>Logout</MenuItem>
+          </Menu>
         </div>
       </Box>
     </NavbarContainer>
