@@ -1,5 +1,5 @@
-import { gql, useQuery } from '@apollo/client';
-import React from 'react';
+import { gql, useMutation } from '@apollo/client';
+import React, { useState } from 'react';
 import * as yup from 'yup';
 import { AuthFormWrapper } from '../../components/forms/auth';
 import SignupForm from '../../components/forms/auth/SignupForm';
@@ -22,18 +22,30 @@ const validationSchema = yup.object({
 
 const initialValues = { email: '', password: '', firstName: '', lastName: '' };
 
-const HELLO_QUERY = gql`
-  {
-    hello
+const SIGNUP_MUTATION = gql`
+  mutation registerMutation($data: SignupInput!) {
+    signUp(data: $data) {
+      id
+      firstName
+      lastName
+      email
+    }
   }
 `;
 
 const SignUp = () => {
-  const { data, loading, error } = useQuery(HELLO_QUERY);
+  const [createUser] = useMutation(SIGNUP_MUTATION);
+  const [loading, setLoading] = useState(false);
 
-  console.log({ data, loading, error });
-  const onSubmit = (values: User) => {
-    console.log('submitting', values);
+  const onSubmit = async (values: User) => {
+    const { firstName, lastName, email, password } = values;
+    setLoading(true);
+    console.log('submitting...');
+    const res = await createUser({
+      variables: { data: { firstName, lastName, email, password } },
+    });
+    setLoading(false);
+    console.log('resticle', values, res);
   };
 
   return (
@@ -47,7 +59,7 @@ const SignUp = () => {
         showLogin
         showDisclaimer
         buttonLabel="Sign up"
-        working={false}
+        working={loading}
       >
         <SignupForm />
       </AuthFormWrapper>
