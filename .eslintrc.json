@@ -48,7 +48,8 @@
         "react/jsx-wrap-multilines": "off",
         "react/prop-types": "off",
         "react/require-default-props": "off",
-        "no-undef": "off"
+        "no-undef": "off",
+        "react/jsx-one-expression-per-line": "off"
     },
     "settings": {
         "import/resolver": {

@@ -9,7 +9,7 @@ import {
   AiOutlineMenu,
   AiOutlinePlus,
 } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 const NavbarContainer = muiStyled('div')(({ theme }) => ({
   height: '40px',
@@ -35,7 +35,7 @@ const Navbar = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const navigate = useNavigate();
+  const { logout } = useAuthContext();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -45,9 +45,9 @@ const Navbar = () => {
     setAnchorEl(null);
   };
 
-  const logOut = () => {
+  const handleLogout = () => {
     handleClose();
-    navigate('/', { replace: true });
+    logout();
   };
 
   return (
@@ -102,7 +102,7 @@ const Navbar = () => {
               'aria-labelledby': 'basic-button',
             }}
           >
-            <MenuItem onClick={logOut}>Logout</MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </Menu>
         </div>
       </Box>

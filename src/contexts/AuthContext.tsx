@@ -2,6 +2,7 @@ import React, {
   createContext,
   ReactNode,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from 'react';
@@ -27,22 +28,31 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
+  useEffect(() => {
+    if (!profile) {
+      const authUser = localStorage.getItem('authuser') || '{}';
+      setProfile(JSON.parse(authUser));
+    }
+  }, []);
+
   const completeLogin = (userData: LoginSuccess) => {
     setProfile(userData.user);
     localStorage.setItem('authtoken', userData.token);
+    localStorage.setItem('authuser', JSON.stringify(userData.user));
     // @ts-ignore
     navigate(state?.path || '/dashboard');
   };
 
   const logout = () => {
-    console.log('Logout');
+    localStorage.removeItem('authtoken');
+    localStorage.removeItem('authuser');
+    setProfile(null);
+    navigate('/login');
   };
 
   const isAuthenticated = (): boolean => {
     return !!localStorage.getItem('authtoken');
   };
-
-  console.log('isAuth98', isAuthenticated());
 
   const context = useMemo(
     () => ({

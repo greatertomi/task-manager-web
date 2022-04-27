@@ -12,8 +12,6 @@ const PageBodyStyles = styled.div`
 const BasePage = () => {
   const { profile } = useAuthContext();
 
-  console.log(profile);
-
   return (
     <>
       <Navbar />
@@ -26,7 +24,7 @@ const BasePage = () => {
               15 Aug, 2022
             </Typography>
           </Box>
-          <Box mt={2}>Welcome, John.</Box>
+          <Box mt={2}>Welcome, {profile?.firstName}.</Box>
         </PageBodyStyles>
       </Box>
     </>

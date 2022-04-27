@@ -1,9 +1,11 @@
-import { gql, useMutation } from '@apollo/client';
-import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { AuthFormWrapper } from '../../components/forms/auth';
 import SignupForm from '../../components/forms/auth/SignupForm';
 import { useAuthContext } from '../../contexts/AuthContext';
+import { SIGNUP_MUTATION } from '../../graphs/auth';
 import { User } from '../../types/User';
 import { PageContainer } from './Login';
 
@@ -23,26 +25,18 @@ const validationSchema = yup.object({
 
 const initialValues = { email: '', password: '', firstName: '', lastName: '' };
 
-const SIGNUP_MUTATION = gql`
-  mutation registerMutation($data: SignupInput!) {
-    signUp(data: $data) {
-      token
-      user {
-        id
-        firstName
-        lastName
-        email
-      }
-    }
-  }
-`;
-
 const SignUp = () => {
   const [createUser] = useMutation(SIGNUP_MUTATION);
-  const { completeLogin } = useAuthContext();
+  const { completeLogin, isAuthenticated } = useAuthContext();
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  // todo -> display error in snackbar
+  useEffect(() => {
+    if (isAuthenticated()) {
+      navigate('/dashboard');
+    }
+  }, []);
+
   const onSubmit = async (values: User) => {
     const { firstName, lastName, email, password } = values;
     setLoading(true);
