@@ -25,7 +25,7 @@ const validationSchema = yup.object({
     .required('Password is required'),
 });
 
-const initialValues: UserAuth = { email: 'test@gmail.com', password: 'test' };
+const initialValues: UserAuth = { email: '', password: '' };
 
 const Login = () => {
   const [loginUser] = useMutation(LOGIN_MUTATION);
@@ -63,7 +63,7 @@ const Login = () => {
         onSubmit={onSubmit}
         validationSchema={validationSchema}
         initialValues={initialValues}
-        showOAuthButtons
+        showOAuthButtons={false}
         showForgotPassword
         showSignUp
         working={loading}

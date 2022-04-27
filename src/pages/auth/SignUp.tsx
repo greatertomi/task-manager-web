@@ -55,7 +55,7 @@ const SignUp = () => {
         onSubmit={onSubmit}
         validationSchema={validationSchema}
         initialValues={initialValues}
-        showOAuthButtons
+        showOAuthButtons={false}
         showLogin
         showDisclaimer
         buttonLabel="Sign up"

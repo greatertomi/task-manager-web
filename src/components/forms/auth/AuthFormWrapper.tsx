@@ -13,7 +13,7 @@ const AuthPaper = styled.div<{ height?: string }>`
   border: 1px solid #dbdbdb;
   width: 450px;
   background: white;
-  height: ${({ height }) => height || '650px'};
+  min-height: ${({ height }) => height || '400px'};
   position: fixed;
   left: calc(50% - (450px / 2));
   top: 50px;
