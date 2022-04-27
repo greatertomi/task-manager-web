@@ -3,12 +3,17 @@ import React from 'react';
 import styled from 'styled-components';
 import Navbar from '../../components/dashboard/Navbar';
 import SideNav from '../../components/dashboard/SideNav';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 const PageBodyStyles = styled.div`
   padding: 30px 10px 50px 15%;
 `;
 
 const BasePage = () => {
+  const { profile } = useAuthContext();
+
+  console.log(profile);
+
   return (
     <>
       <Navbar />

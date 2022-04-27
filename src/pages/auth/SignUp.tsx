@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import * as yup from 'yup';
 import { AuthFormWrapper } from '../../components/forms/auth';
 import SignupForm from '../../components/forms/auth/SignupForm';
+import { useAuthContext } from '../../contexts/AuthContext';
 import { User } from '../../types/User';
 import { PageContainer } from './Login';
 
@@ -25,27 +26,32 @@ const initialValues = { email: '', password: '', firstName: '', lastName: '' };
 const SIGNUP_MUTATION = gql`
   mutation registerMutation($data: SignupInput!) {
     signUp(data: $data) {
-      id
-      firstName
-      lastName
-      email
+      token
+      user {
+        id
+        firstName
+        lastName
+        email
+      }
     }
   }
 `;
 
 const SignUp = () => {
   const [createUser] = useMutation(SIGNUP_MUTATION);
+  const { completeLogin } = useAuthContext();
   const [loading, setLoading] = useState(false);
 
+  // todo -> display error in snackbar
   const onSubmit = async (values: User) => {
     const { firstName, lastName, email, password } = values;
     setLoading(true);
-    console.log('submitting...');
     const res = await createUser({
       variables: { data: { firstName, lastName, email, password } },
     });
+    console.log('response', res.data.signUp);
+    completeLogin(res.data.signUp);
     setLoading(false);
-    console.log('resticle', values, res);
   };
 
   return (
