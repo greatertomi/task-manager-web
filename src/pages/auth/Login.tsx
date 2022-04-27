@@ -1,7 +1,12 @@
-import React from 'react';
+import { useMutation } from '@apollo/client';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import * as yup from 'yup';
 import { AuthFormWrapper, LoginForm } from '../../components/forms/auth';
+import { useAuthContext } from '../../contexts/AuthContext';
+import { useSnackbarContext } from '../../contexts/SnackbarContext';
+import { LOGIN_MUTATION } from '../../graphs/auth';
 import { UserAuth } from '../../types/User';
 
 export const PageContainer = styled.section`
@@ -16,15 +21,39 @@ const validationSchema = yup.object({
     .required('Email is required'),
   password: yup
     .string()
-    .min(8, 'Password should be of minimum 8 characters length')
+    .min(4, 'Password should be of minimum 4 characters length')
     .required('Password is required'),
 });
 
-const initialValues: UserAuth = { email: '', password: '' };
+const initialValues: UserAuth = { email: 'test@gmail.com', password: 'test' };
 
 const Login = () => {
-  const onSubmit = (values: UserAuth) => {
-    console.log('submitting', values);
+  const [loginUser] = useMutation(LOGIN_MUTATION);
+  const [loading, setLoading] = useState(false);
+  const { completeLogin, isAuthenticated } = useAuthContext();
+  const { updateSnackbar } = useSnackbarContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      navigate('/dashboard');
+    }
+  }, []);
+
+  const onSubmit = async (values: UserAuth) => {
+    const { email, password } = values;
+    setLoading(true);
+    const res = await loginUser({ variables: { data: { email, password } } });
+    if (res.data.login.code) {
+      updateSnackbar({
+        show: true,
+        severity: 'error',
+        message: res.data.login.message,
+      });
+    } else {
+      completeLogin(res.data.login);
+    }
+    setLoading(false);
   };
 
   return (
@@ -37,7 +66,7 @@ const Login = () => {
         showOAuthButtons
         showForgotPassword
         showSignUp
-        working={false}
+        working={loading}
       >
         <LoginForm />
       </AuthFormWrapper>

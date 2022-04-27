@@ -2,7 +2,9 @@ import { ThemeProvider } from '@mui/material';
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
+import CustomSnackbar from './components/CustomSnackbar';
 import AuthProvider from './contexts/AuthContext';
+import SnackbarProvider from './contexts/SnackbarContext';
 import GlobalStyle from './globalStyles';
 import { AuthGuard } from './guards/AuthGuard';
 import ForgotPassword from './pages/auth/ForgotPassword';
@@ -17,21 +19,24 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <AuthProvider>
-          <GlobalStyle />
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/forgotPassword" element={<ForgotPassword />} />
-            <Route
-              path="/dashboard"
-              element={
-                <AuthGuard>
-                  <BasePage />
-                </AuthGuard>
-              }
-            />
-          </Routes>
+          <SnackbarProvider>
+            <GlobalStyle />
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/forgotPassword" element={<ForgotPassword />} />
+              <Route
+                path="/dashboard"
+                element={
+                  <AuthGuard>
+                    <BasePage />
+                  </AuthGuard>
+                }
+              />
+            </Routes>
+            <CustomSnackbar />
+          </SnackbarProvider>
         </AuthProvider>
       </BrowserRouter>
     </ThemeProvider>
