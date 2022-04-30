@@ -23,6 +23,7 @@ const validationSchema = yup.object({
   lastName: yup.string().required('Last name is required'),
 });
 
+// work here abit more
 const initialValues = { email: '', password: '', firstName: '', lastName: '' };
 
 const SignUp = () => {
