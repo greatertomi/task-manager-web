@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Navbar from '../../components/dashboard/Navbar';
 import SideNav from '../../components/dashboard/SideNav';
+import Task from '../../components/dashboard/tasks/Task';
 import { useAuthContext } from '../../contexts/AuthContext';
 
 const PageBodyStyles = styled.div`
@@ -25,6 +26,7 @@ const BasePage = () => {
             </Typography>
           </Box>
           <Box mt={2}>Welcome, {profile?.firstName}.</Box>
+          <Task />
         </PageBodyStyles>
       </Box>
     </>
